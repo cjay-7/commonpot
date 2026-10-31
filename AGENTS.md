@@ -29,6 +29,13 @@ docs/               PRD, mockups, OpenAPI file, sprint notes
 ```
 Key pattern: business rules live in `src/lib/money` as pure functions. Route handlers and components call them. This keeps the hard logic easy to test.
 
+### Commands
+- `npm test` runs Vitest once, `npm run typecheck` runs `tsc --noEmit`, `npm run test:coverage` reports coverage. Run all three before opening a PR.
+
+### Function contracts for money code
+- Money functions take integer cents and a list of member ids, and return `{ memberId: string, cents: number }[]` sorted by member id.
+- Invalid input throws an `Error` whose message includes the offending numbers, for example `exact amounts sum to 900 cents but the total is 1000 cents`.
+
 ### Naming and style
 - Files: kebab-case. React components: PascalCase. Functions and variables: camelCase. Database columns: snake_case. Constants: UPPER_SNAKE_CASE.
 - Functions that return money are named with the unit, for example `splitCents`, `totalCents`.
